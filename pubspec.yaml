@@ -12,8 +12,11 @@ environment:
 
 
 dependencies:
+  path_provider: ^2.0.13
   freezed: ^2.3.2
   freezed_annotation: ^2.2.0
+  hooks_riverpod: ^2.3.1
+  flutter_hooks: ^0.18.6
 
 
   flutter:
