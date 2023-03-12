@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -6,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
+import 'package:sembast_sample/local_db_repository/repository.dart';
 
 class RegisterPage extends HookConsumerWidget {
   const RegisterPage({super.key});
@@ -14,9 +14,7 @@ class RegisterPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        Directory appDocDirectory = await getApplicationDocumentsDirectory();
-        DatabaseFactory dbFactory = databaseFactoryIo;
-        Database db = await dbFactory.openDatabase(appDocDirectory.path);
+        ref.watch(dbRepositoryProvider).dbInit();
       });
       return null;
     });
