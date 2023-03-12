@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sembast_sample/register_page.dart';
+import 'package:sembast_sample/view/register_page.dart';
 
 void main() {
   runApp(
