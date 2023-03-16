@@ -1,10 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
-import 'package:sembast/sembast_io.dart';
 import 'package:sembast_sample/local_db_repository/repository.dart';
 
 class RegisterPage extends HookConsumerWidget {
@@ -12,9 +9,10 @@ class RegisterPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    late Database db;
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        ref.watch(dbRepositoryProvider).dbInit();
+        db = await ref.watch(dbRepositoryProvider).dbInit();
       });
       return null;
     });
@@ -141,7 +139,15 @@ class RegisterPage extends HookConsumerWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () async {},
+                onPressed: () async {
+                  ref.watch(dbRepositoryProvider).setValue(
+                        db: db,
+                        fnValue: firsttNamecontroller!.text,
+                        lnValue: lastNamecontroller!.text,
+                        pnValue: phoneNumberController!.value as int,
+                        ageValue: ageController!.value as int,
+                      );
+                },
                 child: const Text('Save'),
               )
             ],
