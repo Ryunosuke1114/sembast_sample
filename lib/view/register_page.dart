@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast_sample/local_db_repository/repository.dart';
+import 'package:sembast_sample/view/fetch_page.dart';
 
 class RegisterPage extends HookConsumerWidget {
   const RegisterPage({super.key});
@@ -140,6 +141,7 @@ class RegisterPage extends HookConsumerWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
+                  print('buttom pushed🔥');
                   ref.watch(dbRepositoryProvider).setValue(
                         db: db,
                         fnValue: firsttNamecontroller!.text,
@@ -147,6 +149,12 @@ class RegisterPage extends HookConsumerWidget {
                         pnValue: phoneNumberController!.value as int,
                         ageValue: ageController!.value as int,
                       );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) => const FetchPage()),
+                    ),
+                  );
                 },
                 child: const Text('Save'),
               )

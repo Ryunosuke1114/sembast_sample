@@ -17,15 +17,16 @@ class DBRerepository {
 
   Future<void> setValue({
     required Database db,
-    String? fnValue,
-    String? lnValue,
-    int? pnValue,
-    int? ageValue,
+    required String fnValue,
+    required String lnValue,
+    required int pnValue,
+    required int ageValue,
   }) async {
     var store = StoreRef.main();
     await store.record('fnKey').put(db, fnValue);
     await store.record('laKey').put(db, lnValue);
     await store.record('pnKey').put(db, pnValue);
     await store.record('ageKey').put(db, ageValue);
+    print('set success🔥');
   }
 }
