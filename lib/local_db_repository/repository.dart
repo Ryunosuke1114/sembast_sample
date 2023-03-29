@@ -21,12 +21,22 @@ class DBRerepository {
     required String lnValue,
     required int pnValue,
     required int ageValue,
+    required StoreRef store,
   }) async {
-    var store = StoreRef.main();
     await store.record('fnKey').put(db, fnValue);
     await store.record('laKey').put(db, lnValue);
     await store.record('pnKey').put(db, pnValue);
     await store.record('ageKey').put(db, ageValue);
     print('set success🔥');
+  }
+
+  Future<void> fetchValue({
+    required Database db,
+    required StoreRef store,
+  }) async {
+    await store.record('fnKey').get(db);
+    await store.record('laKey').get(db);
+    await store.record('pnKey').get(db);
+    await store.record('ageKey').get(db);
   }
 }

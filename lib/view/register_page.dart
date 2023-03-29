@@ -11,17 +11,19 @@ class RegisterPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     late Database db;
+    late StoreRef store;
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         db = await ref.watch(dbRepositoryProvider).dbInit();
+        store = StoreRef.main();
       });
       return null;
     });
 
-    TextEditingController? firsttNamecontroller;
-    TextEditingController? lastNamecontroller;
-    TextEditingController? phoneNumberController;
-    TextEditingController? ageController;
+    TextEditingController firsttNamecontroller = TextEditingController();
+    TextEditingController lastNamecontroller = TextEditingController();
+    TextEditingController phoneNumberController = TextEditingController();
+    TextEditingController ageController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -139,24 +141,40 @@ class RegisterPage extends HookConsumerWidget {
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  print('buttom pushed🔥');
-                  ref.watch(dbRepositoryProvider).setValue(
-                        db: db,
-                        fnValue: firsttNamecontroller!.text,
-                        lnValue: lastNamecontroller!.text,
-                        pnValue: phoneNumberController!.value as int,
-                        ageValue: ageController!.value as int,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      final int intPhNum =
+                          int.parse(phoneNumberController.text);
+                      final int intAge = int.parse(ageController.text);
+                      ref.watch(dbRepositoryProvider).setValue(
+                            db: db,
+                            store: store,
+                            fnValue: firsttNamecontroller.text,
+                            lnValue: lastNamecontroller.text,
+                            pnValue: intPhNum,
+                            ageValue: intAge,
+                          );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => const FetchPage()),
+                        ),
                       );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: ((context) => const FetchPage()),
-                    ),
-                  );
-                },
-                child: const Text('Save'),
+                    },
+                    child: const Text('Save'),
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => FetchPage()),
+                        );
+                      },
+                      child: Text("→"))
+                ],
               )
             ],
           ),
