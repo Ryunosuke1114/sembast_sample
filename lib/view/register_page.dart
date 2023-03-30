@@ -160,7 +160,10 @@ class RegisterPage extends HookConsumerWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => const FetchPage()),
+                          builder: ((context) => FetchPage(
+                                db: db,
+                                store: store,
+                              )),
                         ),
                       );
                     },
@@ -170,7 +173,12 @@ class RegisterPage extends HookConsumerWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => FetchPage()),
+                          MaterialPageRoute(
+                            builder: (context) => FetchPage(
+                              db: db,
+                              store: store,
+                            ),
+                          ),
                         );
                       },
                       child: Text("→"))

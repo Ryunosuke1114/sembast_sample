@@ -24,19 +24,26 @@ class DBRerepository {
     required StoreRef store,
   }) async {
     await store.record('fnKey').put(db, fnValue);
-    await store.record('laKey').put(db, lnValue);
+    await store.record('lnKey').put(db, lnValue);
     await store.record('pnKey').put(db, pnValue);
     await store.record('ageKey').put(db, ageValue);
     print('set success🔥');
   }
 
-  Future<void> fetchValue({
+  Future<List<dynamic>> fetchValue({
     required Database db,
     required StoreRef store,
   }) async {
-    await store.record('fnKey').get(db);
-    await store.record('laKey').get(db);
-    await store.record('pnKey').get(db);
-    await store.record('ageKey').get(db);
+    print('fecthvalue入りました');
+    final fn = await store.record('fnKey').get(db);
+    final ln = await store.record('lnKey').get(db);
+    final pn = await store.record('pnKey').get(db);
+    final age = await store.record('ageKey').get(db);
+    final strPn = pn.toString();
+    final strAge = age.toString();
+
+    print('fn: $fn');
+    print('fecthvalue終わりました');
+    return [fn, ln, strPn, strAge];
   }
 }
