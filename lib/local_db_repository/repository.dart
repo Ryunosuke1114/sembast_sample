@@ -39,11 +39,11 @@ class DBRerepository {
     final ln = await store.record('lnKey').get(db);
     final pn = await store.record('pnKey').get(db);
     final age = await store.record('ageKey').get(db);
-    final strPn = pn.toString();
-    final strAge = age.toString();
+    print(pn.runtimeType);
+    print(age.runtimeType);
 
     print('fn: $fn');
     print('fecthvalue終わりました');
-    return [fn, ln, strPn, strAge];
+    return [fn, ln, pn, age];
   }
 }
