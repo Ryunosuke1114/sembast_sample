@@ -14,18 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
-}
-
 /// @nodoc
 mixin _$User {
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
-  int get phoneNumber => throw _privateConstructorUsedError;
+  String get phoneNumber => throw _privateConstructorUsedError;
   int get age => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
@@ -35,7 +30,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String firstName, String lastName, int phoneNumber, int age});
+  $Res call({String firstName, String lastName, String phoneNumber, int age});
 }
 
 /// @nodoc
@@ -68,7 +63,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       age: null == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
@@ -83,7 +78,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String firstName, String lastName, int phoneNumber, int age});
+  $Res call({String firstName, String lastName, String phoneNumber, int age});
 }
 
 /// @nodoc
@@ -112,7 +107,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       age: null == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
@@ -122,7 +117,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_User implements _User {
   const _$_User(
       {required this.firstName,
@@ -130,14 +125,12 @@ class _$_User implements _User {
       required this.phoneNumber,
       required this.age});
 
-  factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
-
   @override
   final String firstName;
   @override
   final String lastName;
   @override
-  final int phoneNumber;
+  final String phoneNumber;
   @override
   final int age;
 
@@ -160,7 +153,6 @@ class _$_User implements _User {
             (identical(other.age, age) || other.age == age));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, firstName, lastName, phoneNumber, age);
@@ -170,30 +162,21 @@ class _$_User implements _User {
   @pragma('vm:prefer-inline')
   _$$_UserCopyWith<_$_User> get copyWith =>
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_UserToJson(
-      this,
-    );
-  }
 }
 
 abstract class _User implements User {
   const factory _User(
       {required final String firstName,
       required final String lastName,
-      required final int phoneNumber,
+      required final String phoneNumber,
       required final int age}) = _$_User;
-
-  factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
   String get firstName;
   @override
   String get lastName;
   @override
-  int get phoneNumber;
+  String get phoneNumber;
   @override
   int get age;
   @override

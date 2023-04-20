@@ -17,33 +17,17 @@ class DBRerepository {
 
   Future<void> setValue({
     required Database db,
-    required String fnValue,
-    required String lnValue,
-    required int pnValue,
-    required int ageValue,
+    required List<dynamic> userInfo,
     required StoreRef store,
   }) async {
-    await store.record('fnKey').put(db, fnValue);
-    await store.record('lnKey').put(db, lnValue);
-    await store.record('pnKey').put(db, pnValue);
-    await store.record('ageKey').put(db, ageValue);
-    print('set success🔥');
+    await store.record("Key").put(db, userInfo);
   }
 
-  Future<List<dynamic>> fetchValue({
+  Future<List<Object?>> fetchValue({
     required Database db,
     required StoreRef store,
   }) async {
-    print('fecthvalue入りました');
-    final fn = await store.record('fnKey').get(db);
-    final ln = await store.record('lnKey').get(db);
-    final pn = await store.record('pnKey').get(db);
-    final age = await store.record('ageKey').get(db);
-    print(pn.runtimeType);
-    print(age.runtimeType);
-
-    print('fn: $fn');
-    print('fecthvalue終わりました');
-    return [fn, ln, pn, age];
+    final value = await store.record('Key').get(db);
+    return value as List<Object?>;
   }
 }

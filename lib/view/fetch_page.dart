@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sembast/sembast.dart';
@@ -16,18 +14,7 @@ class FetchPage extends ConsumerStatefulWidget {
 }
 
 class _FetchPageState extends ConsumerState<FetchPage> {
-  List<dynamic> values = [];
   late Widget child;
-  @override
-  void initState() {
-    super.initState();
-    Future(() async {
-      values = await ref.watch(dbRepositoryProvider).fetchValue(
-            db: widget.db,
-            store: widget.store,
-          );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,28 +26,30 @@ class _FetchPageState extends ConsumerState<FetchPage> {
             .fetchValue(db: widget.db, store: widget.store),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            //TODO Userにsnapshotを流す
-            User user = User(
-              firstName: snapshot.data![1],
-              lastName: snapshot.data![2],
-              phoneNumber: snapshot.data![3],
-              age: snapshot.data![4],
+            final data = snapshot.data as List<Object?>;
+            final user = User(
+              firstName: data[0] as String,
+              lastName: data[1] as String,
+              phoneNumber: data[2] as String,
+              age: data[3] as int,
             );
-            print('user🔥: $user');
-            // final child = Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [for (final snapshot in snapshot.data!) Text(snapshot)],
-            // );
-            return child;
-          } else if (snapshot.hasError) {
-            final error = e.toString();
-            Center(
-              child: Text(error),
+            return child = Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("First Name is ${user.firstName}"),
+                  Text("Last Name is ${user.lastName}"),
+                  Text("Phone Number is ${user.phoneNumber}"),
+                  Text("Age is ${user.age.toString()}"),
+                ],
+              ),
             );
           } else {
-            const Center(child: CircularProgressIndicator());
+            child = const Center(
+              child: Text("データがありません"),
+            );
           }
-          return Center(child: Text('...'));
+          return child;
         },
       ),
     );

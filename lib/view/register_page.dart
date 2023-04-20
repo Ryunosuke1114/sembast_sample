@@ -146,16 +146,17 @@ class RegisterPage extends HookConsumerWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      final int intPhNum =
-                          int.parse(phoneNumberController.text);
                       final int intAge = int.parse(ageController.text);
+                      final List<Object?> userInfo = [
+                        firsttNamecontroller.text,
+                        lastNamecontroller.text,
+                        phoneNumberController.text,
+                        intAge,
+                      ];
                       ref.watch(dbRepositoryProvider).setValue(
                             db: db,
                             store: store,
-                            fnValue: firsttNamecontroller.text,
-                            lnValue: lastNamecontroller.text,
-                            pnValue: intPhNum,
-                            ageValue: intAge,
+                            userInfo: userInfo,
                           );
                       Navigator.push(
                         context,
