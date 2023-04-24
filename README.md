@@ -1,16 +1,13 @@
 # sembast_sample
 
-A new Flutter project.
+This repository is simple app for sembaset
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Please input your first name and last name and so on ... and press save button.
 
-A few resources to get you started if this is your first Flutter project:
+Your info will be saved and fetched next page.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+"→" button is only push next page not save any value. 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
