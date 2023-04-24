@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sembast/sembast.dart';
 import 'package:sembast_sample/entity/user.dart';
 import 'package:sembast_sample/local_db_repository/repository.dart';
 
 class FetchPage extends ConsumerStatefulWidget {
-  FetchPage({super.key, required this.db, required this.store});
-  Database db;
-  StoreRef store;
+  const FetchPage({super.key});
 
   @override
   ConsumerState<FetchPage> createState() => _FetchPageState();
@@ -21,9 +18,7 @@ class _FetchPageState extends ConsumerState<FetchPage> {
     return Scaffold(
       appBar: AppBar(),
       body: FutureBuilder(
-        future: ref
-            .watch(dbRepositoryProvider)
-            .fetchValue(db: widget.db, store: widget.store),
+        future: ref.watch(dbRepositoryProvider).fetchValue(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data as List<Object?>;

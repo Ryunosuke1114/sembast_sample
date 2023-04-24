@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sembast/sembast.dart';
 import 'package:sembast_sample/local_db_repository/repository.dart';
 import 'package:sembast_sample/view/fetch_page.dart';
 
-class RegisterPage extends HookConsumerWidget {
+class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    late Database db;
-    late StoreRef store;
-    useEffect(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        db = await ref.watch(dbRepositoryProvider).dbInit();
-        store = StoreRef.main();
-      });
-      return null;
-    });
+  RegisterPageState createState() => RegisterPageState();
+}
 
+class RegisterPageState extends ConsumerState<RegisterPage> {
+  @override
+  void initState() {
+    Future(() async {
+      await ref.read(dbRepositoryProvider).dbInit();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     TextEditingController firsttNamecontroller = TextEditingController();
     TextEditingController lastNamecontroller = TextEditingController();
     TextEditingController phoneNumberController = TextEditingController();
@@ -154,17 +155,12 @@ class RegisterPage extends HookConsumerWidget {
                         intAge,
                       ];
                       ref.watch(dbRepositoryProvider).setValue(
-                            db: db,
-                            store: store,
                             userInfo: userInfo,
                           );
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => FetchPage(
-                                db: db,
-                                store: store,
-                              )),
+                          builder: ((context) => const FetchPage()),
                         ),
                       );
                     },
@@ -175,14 +171,11 @@ class RegisterPage extends HookConsumerWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => FetchPage(
-                              db: db,
-                              store: store,
-                            ),
+                            builder: (context) => const FetchPage(),
                           ),
                         );
                       },
-                      child: Text("→"))
+                      child: const Text("→"))
                 ],
               )
             ],
